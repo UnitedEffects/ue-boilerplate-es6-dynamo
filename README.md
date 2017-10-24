@@ -9,3 +9,7 @@ Use this boilerplate as a base to build your dynamodb based service
 * DynamoDB
 * Swagger
 * Mocha/Chai Testing
+
+## DynamoDB Local
+
+Download and setup instructions here: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html

@@ -15,6 +15,13 @@ const callbackFactory = {
             data: message
         };
     },
+    error(error, type) {
+        return {
+            code: 400,
+            type,
+            data: error
+        };
+    },
     fail400(message) {
         return {
             code: 400,
@@ -24,7 +31,7 @@ const callbackFactory = {
     fail401(message) {
         return {
             code: 401,
-            data: 'Unauthorized' || message
+            data: (message) || 'Unauthorized'
         };
     },
     fail403(message) {
@@ -42,7 +49,7 @@ const callbackFactory = {
     fail405(message) {
         return {
             code: 405,
-            data: (message) || 'Invalid input'
+            data: (message) || 'Method not allowed'
         };
     },
     fail409(message) {

@@ -5,7 +5,7 @@
 const helper = {
     isJson(check) {
         try {
-            const thisJSON = JSON.parse(check);
+            JSON.parse(check);
             return true;
         } catch (e) {
             return false;

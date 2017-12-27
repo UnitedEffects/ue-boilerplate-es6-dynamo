@@ -1,7 +1,7 @@
 {
   "name": "ue-boilerplate-es6-dynamo",
-  "version": "1.0.0",
-  "private": true,
+  "version": "1.0.1",
+  "private": false,
   "main": "app.js",
   "contributors": [
     {

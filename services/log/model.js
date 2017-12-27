@@ -14,10 +14,12 @@ dynamoose.AWS.config.update({
     region: config.AWS_REGION
 });
 
-/**
- * Remove this when in prod...
- */
-dynamoose.local();
+if (config.ENV !== 'production' && config.ENV !== 'stage') {
+    console.info('Logs are using local dynamodb');
+    dynamoose.local();
+} else {
+    console.info('Logs attempting to use AWS DynamoDB');
+}
 
 const logSchema = new dynamoose.Schema({
     logCode: {
@@ -34,6 +36,9 @@ const logSchema = new dynamoose.Schema({
     details: {
         type: Object
     }
+},{
+    useDocumentTypes: true,
+    saveUnknown: true,
 });
 
-export default dynamoose.model('msvc-emailval-log', logSchema);
+export default dynamoose.model(config.DYNAMODB_LOGS, logSchema);

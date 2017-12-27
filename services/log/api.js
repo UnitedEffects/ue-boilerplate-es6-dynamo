@@ -5,7 +5,6 @@
 import responder from '../responder';
 import response from '../response';
 import logs from './logs';
-import Log from './model';
 
 const api = {
     writeLog(req, res) {

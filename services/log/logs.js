@@ -1,12 +1,12 @@
 /**
  * Created by bmotlagh on 10/23/17.
  */
-
-import responder from '../response';
 import moment from 'moment';
+import responder from '../response';
+import helper from '../helper';
 import Log from './model';
 
-const logs = {
+export default {
     /**
      * Allows you to pass a data object which is recorded as a log entry.
      * @param data
@@ -17,12 +17,22 @@ const logs = {
         logData.logTimestamp = moment().format();
         logData.logCode = data.logCode.toUpperCase();
         return new Promise((resolve, reject) => {
-            const log = new Log(logData);
+            const writeLog = logData;
+            if (writeLog.message) {
+                writeLog.message = (helper.isJson(writeLog.message)) ?
+                    writeLog.message : JSON.stringify(writeLog.message);
+            }
+            if (writeLog.details) {
+                writeLog.details = (helper.isJson(writeLog.details)) ?
+                    writeLog.details : JSON.stringify(writeLog.details);
+            }
+            const log = new Log(writeLog);
             log.save((err, result) => {
                 if (err) {
                     console.error(err);
                     return reject(responder.fail500('Could not save log'));
                 }
+                console.info(logData);
                 return resolve(responder.set200(result, 'Log'));
             });
         });
@@ -77,12 +87,16 @@ const logs = {
      * @param message
      */
     error(message) {
-        const log = new Log({
+        const data = {
             logCode: 'ERROR',
             logTimestamp: moment().format(),
             message
-        });
-        console.info(log);
+        };
+        const writeLog = JSON.parse(JSON.stringify(data));
+        writeLog.message = (helper.isJson(writeLog.message)) ?
+            writeLog.message : JSON.stringify(writeLog.message);
+        const log = new Log(writeLog);
+        console.info(data);
         log.save();
     },
     /**
@@ -91,12 +105,16 @@ const logs = {
      * @param message
      */
     notify(message) {
-        const log = new Log({
+        const data = {
             logCode: 'NOTIFY',
             logTimestamp: moment().format(),
             message
-        });
-        console.info(log);
+        };
+        const writeLog = JSON.parse(JSON.stringify(data));
+        writeLog.message = (helper.isJson(writeLog.message)) ?
+            writeLog.message : JSON.stringify(writeLog.message);
+        const log = new Log(writeLog);
+        console.info(data);
         log.save();
     },
     /**
@@ -104,12 +122,16 @@ const logs = {
      * @param message
      */
     success(message) {
-        const log = new Log({
+        const data = {
             logCode: 'SUCCESS',
             logTimestamp: moment().format(),
             message
-        });
-        console.info(log);
+        };
+        const writeLog = JSON.parse(JSON.stringify(data));
+        writeLog.message = (helper.isJson(writeLog.message)) ?
+            writeLog.message : JSON.stringify(writeLog.message);
+        const log = new Log(writeLog);
+        console.info(data);
         log.save();
     },
     /**
@@ -120,15 +142,19 @@ const logs = {
      * @param detail
      */
     detail(code, message, detail) {
-        const log = new Log({
+        const data = {
             logCode: code,
             logTimestamp: moment().format(),
             message,
             details: detail
-        });
-        console.info(log);
+        };
+        const writeLog = JSON.parse(JSON.stringify(data));
+        writeLog.message = (helper.isJson(writeLog.message)) ?
+            writeLog.message : JSON.stringify(writeLog.message);
+        writeLog.details = (helper.isJson(writeLog.details)) ?
+            writeLog.details : JSON.stringify(writeLog.details);
+        const log = new Log(writeLog);
+        console.info(data);
         log.save();
     }
 };
-
-export default logs;

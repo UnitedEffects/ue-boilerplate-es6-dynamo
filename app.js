@@ -13,7 +13,7 @@ import index from './routes/index';
 import api from './routes/api_v1';
 
 const app = express();
-const debug = Debug('msvc-email-validation:app');
+const debug = Debug('ue-boilerplate-es6-dynamo:app');
 app.set('views', path.join(__dirname, 'views'));
 // view engine setup
 app.set('view engine', 'pug');

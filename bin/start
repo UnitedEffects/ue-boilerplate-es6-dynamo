@@ -12,7 +12,7 @@ require('babel-core/register');
 require('babel-polyfill');
 
 const app = require('../app').default;
-const debug = require('debug')('msvc-email-validation:server');
+const debug = require('debug')('ue-boilerplate-es6-dynamo:server');
 const http = require('http');
 // const dynamoose = require('dynamoose');
 // const config = require('../config');

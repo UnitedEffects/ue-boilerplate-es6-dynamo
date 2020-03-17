@@ -1,5 +1,7 @@
 # Boilerplate ES6 Service with DynamoDB
 
+OUT OF DATE - DO NOT USE
+
 Use this boilerplate as a base to build your dynamodb based service
 
 ## Technology
